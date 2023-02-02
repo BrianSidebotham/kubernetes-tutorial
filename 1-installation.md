@@ -7,13 +7,14 @@ In this series we'll investigate how to get a complete service up and running on
 The series will:
 
 1. Install a highly available kubernetes cluster on a number of virtual machines.
-2.
+2. [Introduce ingress control and load balancing](2-ingress-and-loadbalancing.md)
+3. [Add Cluster Storage](3-storage.md)
 
 ## Host OS - TALOS
 
 It is best for kubernetes to be the single thing that a server does and to this end you need a minimal OS to host the kubernetes API and container services.
 
-TALOS is an excellent demonstration of just how good that can get. <Info about talos>
+[TALOS](https://www.talos.dev/) is an excellent demonstration of just how good that can get.
 
 # On Virtualisation
 
@@ -22,15 +23,13 @@ You can choose to put TALOS on bare metal you have lying around or else you can 
 Here's the Proxmox how-to:
 
 ```shell
-$ curl https://github.com/talos-systems/talos/releases/download/v1.0.0/talosctl-linux-amd64 -L -o talosctl
-$ sudo cp ./talosctl /usr/local/bin/
-$ sudo chmod +x /usr/local/bin/talosctl
+$ curl -sL https://talos.dev/install | sh
 ```
 
 For Proxmox Virtual Machines to boot into the OS we need to provide a CDROM ISO to boot from. Download that as well:
 
 ```shell
-$ curl https://github.com/talos-systems/talos/releases/download/v1.0.0/talos-amd64.iso -L -o talos-amd64.iso
+$ curl https://github.com/talos-systems/talos/releases/download/v1.2.6/talos-amd64.iso -L -o talos-amd64.iso
 ```
 
 It's a mere 77MiB for v1. It's likely to stay around this size as it's mainly just a hardended linux kernel and a couple of services running. Nothing more.
